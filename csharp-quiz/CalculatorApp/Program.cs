@@ -7,10 +7,21 @@ class Program
         try
             {
                 Console.WriteLine("Enter the first number:");
-                double num1 = Convert.ToDouble(Console.ReadLine());
+                string input1 = Console.ReadLine();
+                
+                if (!double.TryParse(input1, out double num1))
+                {
+                    throw new FormatException("Invalid input. Please enter numeric values.");
+                }
 
                 Console.WriteLine("Enter the second number:");
-                double num2 = Convert.ToDouble(Console.ReadLine());
+                string input2 = Console.ReadLine();
+
+                if (!double.TryParse(input2, out double num2))
+                {
+                    throw new FormatException("Invalid input. Please enter numeric values.");
+                }
+
 
                 Console.WriteLine("Enter the operation (add, subtract, multiply, divide):");
                 string operation = Console.ReadLine()?.ToLower() ?? string.Empty;
@@ -21,15 +32,15 @@ class Program
             }
             catch (FormatException)
             {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
+                Console.WriteLine("Invalid input. Please enter numeric values.");
             }
             catch (DivideByZeroException)
             {
-                Console.WriteLine("Error: Division by zero is not allowed.");
+                Console.WriteLine("Cannot divide by zero.");
             }
             catch (NotImplementedException)
             {
-                Console.WriteLine("Error: The specified operation is not implemented.");
+                Console.WriteLine("An error occurred: The specified operation is not supported.");
             }
             catch (Exception ex)
             {
